@@ -1,44 +1,41 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "tardis",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Tardis",
+  "description": "Tardis",
   "authors": [
-    "Turnip Labs"
+    "MaliceDevelopment"
   ],
   "contact": {
     "homepage": "",
     "sources": ""
   },
 
-	"icon": "icon.png",
+  "icon": "icon.png",
   "license": "CC0-1.0",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-			"turniplabs.examplemod.ExampleMod"
+      "malicedevelopment.tardis.Tardis"
     ],
-		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
-		]
-	},
+    "beforeGameStart": [
+      "malicedevelopment.tardis.Tardis"
+    ],
+    "afterGameStart": [
+      "malicedevelopment.tardis.Tardis"
+    ],
+    "recipesReady": [
+      "malicedevelopment.tardis.Tardis"
+    ]
+  },
   "mixins": [
-      "examplemod.mixins.json"
+    "tardis.mixins.json"
   ],
 
   "depends": {
-		"minecraft": "^7.2-beta",
     "fabricloader": ">=0.15.5"
-  },
-  "suggests": {
   }
 }
