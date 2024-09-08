@@ -9,6 +9,9 @@ public class tardisblock {
     public static Block TARDISfuncblock;
 
     public static void init() {
-        TARDISfuncblock = new BlockBuilder(Tardis.MOD_ID).build(new Block("TARDIS", 3600, Material.metal));
-    }
+        TARDISfuncblock = new BlockBuilder(Tardis.MOD_ID)
+			
+			.build(new Block("TARDIS", 3600, Material.metal));
+
+	}
 }

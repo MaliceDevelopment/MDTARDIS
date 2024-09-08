@@ -1,7 +1,7 @@
 package malicedevelopment.tardis;
 
 import malicedevelopment.tardis.block.tardisblock;
-
+import malicedevelopment.tardis.block.CinnabarOreBlock;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.material.Material;
@@ -18,6 +18,7 @@ public class Tardis implements ModInitializer, GameStartEntrypoint, RecipeEntryp
     public void onInitialize() {
 		LOGGER.info("Tardis initialized.");
 		tardisblock.init();
+		CinnabarOreBlock.init();
 	}
 	@Override
 	public void beforeGameStart() {
