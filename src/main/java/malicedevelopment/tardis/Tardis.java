@@ -1,8 +1,7 @@
 package malicedevelopment.tardis;
 
-import malicedevelopment.tardis.block.type40block;
-import malicedevelopment.tardis.block.CinnabarOreBlock;
-import malicedevelopment.tardis.item.Cinnabar;
+import malicedevelopment.tardis.block.ModBlocks;
+import malicedevelopment.tardis.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +14,11 @@ public class Tardis implements ModInitializer, GameStartEntrypoint, RecipeEntryp
     @Override
     public void onInitialize() {
 		LOGGER.info("Tardis initialized.");
-		type40block.init();
-		CinnabarOreBlock.init();
-		Cinnabar.init();
 	}
 	@Override
 	public void beforeGameStart() {
-
+		ModBlocks.init(); // Makes sure all of our block are initialized
+		ModItems.init(); // Makes sure all of our items are initialized
 	}
 
 	@Override
