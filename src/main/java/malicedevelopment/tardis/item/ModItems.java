@@ -1,16 +1,17 @@
 package malicedevelopment.tardis.item;
 
 import malicedevelopment.tardis.Tardis;
-import malicedevelopment.tardis.block.CinnabarOreBlock;
 import net.minecraft.core.item.Item;
 import turniplabs.halplibe.helper.ItemBuilder;
-import turniplabs.halplibe.helper.ItemHelper;
 
-public class Cinnabar {
-	public static Item CinnabarOre;
+public final class ModItems {
+	private ModItems() {} // Makes it impossible to accidentally call 'new ModItems()'
 
+	public static Item cinnabar;
 	public static void init() {
-		CinnabarOre = new ItemBuilder(Tardis.MOD_ID)
+		// TODO make numeric block ids configurable by the user
+		// TODO actually use lang file to set names
+		cinnabar = new ItemBuilder(Tardis.MOD_ID)
 			.setIcon("tardis:item/cinnabar")
 			.setStackSize(64)
 			.build(new Item("Cinnabar",20000));
