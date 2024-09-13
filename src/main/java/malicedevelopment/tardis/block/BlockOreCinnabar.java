@@ -16,12 +16,12 @@ public class BlockOreCinnabar extends Block {
 	@Override
 	public ItemStack[] getBreakResult(World world, EnumDropCause dropCause, int x, int y, int z, int meta, TileEntity tileEntity) {
 		switch (dropCause) {
-			case IMPROPER_TOOL:
+			case IMPROPER_TOOL: // When broken with the wrong tool drop nothing (in this case null is a stand in for nothing)
 				return null;
-			case PICK_BLOCK:
+			case PICK_BLOCK: // When using pick block or silk touch drop the ore block itself
 			case SILK_TOUCH:
 				return new ItemStack[]{new ItemStack(this)}; // Makes a new itemstack array that only contains a single stack with a single instance of the block (1x cinnabar ore)
-			default:
+			default: // When broken with the right tool, or by the world (explosions) drop 1 cinnabar
 				return new ItemStack[]{new ItemStack(ModItems.cinnabar, 1)};
 		}
 	}
