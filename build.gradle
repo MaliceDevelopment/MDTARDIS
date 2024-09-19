@@ -24,7 +24,7 @@ repositories {
 		name = 'Fabric'
 		url = 'https://maven.fabricmc.net/'
 	}
-	
+
 	ivy {
 		url = "https://github.com/Better-than-Adventure"
 		patternLayout {
@@ -33,6 +33,7 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
+
 	ivy {
 		url = "https://github.com/Turnip-Labs"
 		patternLayout {
@@ -73,8 +74,17 @@ repositories {
 		}
 		metadataSources { artifact() }
 	}
-
+	ivy {
+		url = "https://github.com/UselessSolutions"
+		patternLayout {
+			artifact "[organisation]/releases/download/v[revision]/[module]-[revision].jar"
+			m2compatible = true
+		}
+		metadataSources { artifact() }
+	}
 }
+
+
 
 
 dependencies {
@@ -90,7 +100,7 @@ dependencies {
 
 	modImplementation "ModMenu:ModMenu:${project.mod_menu_version}"
 	modImplementation "com.github.UselessSolutions:dragonfly:${project.dragonfly_version}"
-
+	modImplementation "TerrainAPI:terrainapi:${project.terrain_api_version}"
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
 
