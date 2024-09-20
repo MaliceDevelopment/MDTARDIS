@@ -3,6 +3,8 @@ package malicedevelopment.tardis;
 import malicedevelopment.tardis.block.ModBlocks;
 import malicedevelopment.tardis.item.ModItems;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.core.item.tool.ItemToolPickaxe;
+import net.minecraft.core.item.tool.ItemToolShovel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.util.GameStartEntrypoint;
@@ -14,6 +16,7 @@ public class Tardis implements ModInitializer, GameStartEntrypoint, RecipeEntryp
     @Override
     public void onInitialize() {
 		LOGGER.info("Tardis initialized.");
+		ItemToolPickaxe.miningLevels.put(ModBlocks.CinnabarOre,2);
 	}
 	@Override
 	public void beforeGameStart() {
