@@ -4,6 +4,7 @@
     "package": "malicedevelopment.tardis.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+      "ItemToolShovelMixin"
     ],
     "client": [
     ],
