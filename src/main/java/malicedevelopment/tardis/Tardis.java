@@ -8,9 +8,13 @@ import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
+import java.util.Random;
+
 public class Tardis implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint {
     public static final String MOD_ID = "tardis";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Random MASTER_RANDOM = new Random();
+
     @Override
     public void onInitialize() {
 		LOGGER.info("Tardis initialized.");
