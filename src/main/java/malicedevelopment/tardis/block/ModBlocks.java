@@ -24,13 +24,13 @@ public class ModBlocks {
 				//.setBlockState("network_cable.json")
 				.build(block)
 			)
-			.build(new Block("TARDIS", 3600, Material.metal));
+			.build(new Block("tardis", 3600, Material.metal));
 
 		CinnabarOre = new BlockBuilder(Tardis.MOD_ID)
 			.setTextures("tardis:block/cinnabar_ore")
 			.setBlockSound(BlockSounds.SAND)
 			.setHardness(5)
-			.build(new BlockOreCinnabar("Cinnabar Ore",3601, Material.sand))
+			.build(new BlockOreCinnabar("cinnabar_ore",3601, Material.sand))
 			.withTags(BlockTags.MINEABLE_BY_SHOVEL);
 
 	}
