@@ -8,6 +8,9 @@
     "ItemToolShovelMixin"
   ],
   "client": [
+    "ModelBipedMixin",
+    "PlayerRendererMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1

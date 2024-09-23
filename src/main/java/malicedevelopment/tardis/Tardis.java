@@ -24,6 +24,7 @@ public class Tardis implements ModInitializer, GameStartEntrypoint, RecipeEntryp
 	public void beforeGameStart() {
 		ModBlocks.init(); // Makes sure all of our block are initialized
 		ModItems.init(); // Makes sure all of our items are initialized
+		TardisSounds.init();
 	}
 
 	@Override
