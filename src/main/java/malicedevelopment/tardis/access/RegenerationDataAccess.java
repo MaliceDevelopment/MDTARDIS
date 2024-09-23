@@ -11,4 +11,10 @@ public interface RegenerationDataAccess {
 	public int getRegensLeft();
 
 	public boolean isRegenerating();
+
+	public void setSkin(String skin);
+	public String getSkin();
+
+	public boolean isSlim();
+	public void setSlim(boolean slim);
 }

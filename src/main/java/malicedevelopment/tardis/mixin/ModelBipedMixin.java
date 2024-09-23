@@ -89,6 +89,10 @@ public class ModelBipedMixin implements ModelPlayerAccess {
 
 			copyAll();
 			ci.cancel();
+		} else {
+			// Resets the legs, since Minecraft doesn't actually do this on its own
+			thisAs.bipedLeftLeg.rotateAngleZ = 0;
+			thisAs.bipedRightLeg.rotateAngleZ = 0;
 		}
 	}
 

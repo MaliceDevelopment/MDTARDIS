@@ -70,7 +70,7 @@ public class RenderRegenerationLayer {
 // Undo state manager changes
 			GL11.glDepthMask(false);
 			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glDisable(GL11.GL_ALPHA_TEST);
+			GL11.glDisable(GL11.GL_ALPHA);
 			GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPopAttrib();
@@ -78,34 +78,36 @@ public class RenderRegenerationLayer {
 	}
 
 	public static void renderCone(EntityPlayer entityPlayer, float scale, float scale2, Vec3d color, float partialTicks, boolean mirrorRor) {
-
 		Tessellator tessellator = Tessellator.instance;
 
 		for (int i = 0; i < 8; i++) {
 			GL11.glPushMatrix();
-			GL11.glRotatef((entityPlayer.tickCount + partialTicks) * 4 *(mirrorRor ? -1 : 1) + i * 45, 0.0F, 1.0F, 0.0F);
+			// Adding a slight twist to the rotation for a dynamic look
+			float rotationAngle = (entityPlayer.tickCount + partialTicks) * 4 * (mirrorRor ? -1 : 1) + i * 45 + (float)(Math.sin((entityPlayer.tickCount + partialTicks) * 0.1) * 10);
+			GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
 			GL11.glScalef(1.0f, 1.0f, 0.65f);
 
-			tessellator.startDrawingQuads();
-			tessellator.setColorRGBA_F((float) color.xCoord, (float) color.yCoord, (float) color.zCoord, 0.65F);
+			// Create a gradient effect
+			for (int j = 0; j <= 1; j++) {
+				float alpha = 0.65F * (1 - j * 0.5F); // Fade effect
+				tessellator.startDrawingQuads();
+				tessellator.setColorRGBA_F((float) color.xCoord, (float) color.yCoord, (float) color.zCoord, alpha);
 
-			tessellator.addVertex(0.0D, 0.0D, 0.0D);
+				// Central vertex
+				tessellator.addVertex(0.0D, 0.0D, 0.0D);
 
-			tessellator.addVertex(-0.266D * scale, scale, -0.5F * scale);
-			tessellator.addVertex(0.266D * scale, scale, -0.5F * scale);
+				// Base vertices
+				tessellator.addVertex(-0.266D * scale, scale, -0.5F * scale);
+				tessellator.addVertex(0.266D * scale, scale, -0.5F * scale);
+				tessellator.addVertex(0.0D, scale2, 1.0F * scale);
 
-			tessellator.addVertex(0.0D, 0.0D, 0.0D);
-			tessellator.addVertex(0.266D * scale, scale, -0.5F * scale);
-			tessellator.addVertex(0.0D, scale2, 1.0F * scale);
-
-			tessellator.addVertex(0.0D, 0.0D, 0.0D);
-			tessellator.addVertex(0.0D, scale2, 1.0F * scale);
-			tessellator.addVertex(-0.266D * scale, scale, -0.5F * scale);
-
-			tessellator.draw();
+				tessellator.draw();
+			}
 
 			GL11.glPopMatrix();
 		}
+
 	}
+
 
 }

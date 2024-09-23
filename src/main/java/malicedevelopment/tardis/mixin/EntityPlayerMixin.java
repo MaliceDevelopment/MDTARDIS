@@ -2,7 +2,9 @@ package malicedevelopment.tardis.mixin;
 
 import com.mojang.nbt.CompoundTag;
 import malicedevelopment.tardis.access.RegenerationDataAccess;
+import malicedevelopment.tardis.skin.SkinDownloader;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.util.helper.DamageType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 import static malicedevelopment.tardis.Tardis.MASTER_RANDOM;
 
@@ -22,7 +26,34 @@ public abstract class EntityPlayerMixin implements RegenerationDataAccess {
 
 	int regenerationTicksElapsed = -1;
 	int regensLeft = 12;
+	String skin = "";
 	final int REGEN_DURATION = 200;
+	boolean isSlim = false;
+
+	@Override
+	public String getSkin() {
+		return skin;
+	}
+
+	@Override
+	public void setSkin(String skin) {
+		this.skin = skin;
+	}
+
+	@Override
+	public boolean isSlim() {
+		return isSlim;
+	}
+
+	@Override
+	public void setSlim(boolean slim) {
+		isSlim = slim;
+	}
+
+	@Inject(method = "killed(Lnet/minecraft/core/entity/EntityLiving;)V", at = @At("HEAD"), cancellable = true, remap = false)
+	public void killed(EntityLiving entityliving, CallbackInfo ci) {
+		setSkin("");
+	}
 
 	@Inject(method = "hurt(Lnet/minecraft/core/entity/Entity;ILnet/minecraft/core/util/helper/DamageType;)Z", at = @At("HEAD"), cancellable = true, remap = false)
 	public void hurt(Entity attacker, int damage, DamageType type, CallbackInfoReturnable<Boolean> cir) {
@@ -30,6 +61,12 @@ public abstract class EntityPlayerMixin implements RegenerationDataAccess {
 		// The fire effect will hurt the player, we dont want this
 		if (regenerationTicksElapsed > 0) {
 			cir.cancel();
+		}
+
+		if (regenerationTicksElapsed < 10) {
+			SkinDownloader.SkinData randomSkin = SkinDownloader.getRandomSkin();
+			skin = randomSkin.getLink();
+			isSlim = randomSkin.isSlim();
 		}
 
 		// Stop Death!
@@ -69,12 +106,14 @@ public abstract class EntityPlayerMixin implements RegenerationDataAccess {
 	public void readAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
 		regensLeft = tag.getInteger("regenerations_left");
 		regenerationTicksElapsed = tag.getInteger("regeneration_timer");
+		skin = tag.getString("regeneration_skin");
 	}
 
 	@Inject(method = "addAdditionalSaveData(Lcom/mojang/nbt/CompoundTag;)V", at = @At("HEAD"), cancellable = true, remap = false)
 	public void addAdditionalSaveData(CompoundTag tag, CallbackInfo ci) {
 		tag.putInt("regenerations_left", regensLeft);
 		tag.putInt("regeneration_timer", regenerationTicksElapsed);
+		tag.putString("regeneration_skin", skin);
 	}
 
 	@Override
