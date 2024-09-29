@@ -1,14 +1,15 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "malicedevelopment.tardis.mixin",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-      "ItemToolShovelMixin"
-    ],
-    "client": [
-    ],
-    "injectors": {
-        "defaultRequire": 1
+  "required": true,
+  "minVersion": "0.8",
+  "package": "malicedevelopment.tardis.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "DimensionMixin",
+    "ItemToolShovelMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
   }
 }
