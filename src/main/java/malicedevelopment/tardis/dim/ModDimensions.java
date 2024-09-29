@@ -10,7 +10,7 @@ public class ModDimensions {
 
 	public static void register() {}
 
-	public static void DimensionShit(int targetDimension){
+	public static void DimensionShift(int targetDimension){
 		Minecraft mc = Minecraft.getMinecraft(Minecraft.class);
 		EntityPlayer player = mc.thePlayer;
 		World world = mc.theWorld;
