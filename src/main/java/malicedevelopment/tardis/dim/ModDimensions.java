@@ -22,6 +22,19 @@ public class ModDimensions {
 		player.removed = false;
 		double x = player.x;
 		double z = player.z;
-
+		if (player.isAlive()) {
+			world.updateEntityWithOptionalForce(player, false);
+		}
+		world = new World(world, newDim);
+		if (newDim == lastDim.homeDim) {
+			mc.changeWorld(world, "Leaving " + lastDim.getTranslatedName(), player);
+		} else {
+			mc.changeWorld(world, "Entering " + newDim.getTranslatedName(), player);
+		}
+		player.world = world;
+		if (player.isAlive()) {
+			player.moveTo(player.x, world.worldType.getMaxY()+1, player.z, player.yRot, player.xRot);
+			world.updateEntityWithOptionalForce(player, false);
+		}
 	}
 }

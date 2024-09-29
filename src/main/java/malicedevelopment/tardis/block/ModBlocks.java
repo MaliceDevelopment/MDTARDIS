@@ -2,6 +2,7 @@ package malicedevelopment.tardis.block;
 
 import malicedevelopment.tardis.Tardis;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockPortal;
 import net.minecraft.core.block.material.Material;
 import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.sound.BlockSounds;
@@ -13,7 +14,7 @@ import static malicedevelopment.tardis.Tardis.MOD_ID;
 public class ModBlocks {
 	public static Block TARDIStype40funcblock;
 	public static Block CinnabarOre;
-
+	public static Block portalTardis;
 	public static void init() {
 		// TODO make numeric block ids configurable by the user
 		// TODO actually use lang file to set names
@@ -33,5 +34,11 @@ public class ModBlocks {
 			.build(new BlockOreCinnabar("Cinnabar Ore",3601, Material.sand))
 			.withTags(BlockTags.MINEABLE_BY_SHOVEL);
 
+		portalTardis = new BlockBuilder(MOD_ID)
+			.setHardness(-1.0f)
+			.setResistance(-1.0f)
+			.setTextures("tardis:block/cinnabar_ore")
+			.setTags(BlockTags.BROKEN_BY_FLUIDS, BlockTags.NOT_IN_CREATIVE_MENU)
+			.build(new BlockPortal("portal.tardis", 3602, 5, 3601, 3600));
 	}
 }
